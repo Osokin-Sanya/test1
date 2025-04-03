@@ -595,7 +595,9 @@
 
       img {
         max-width: 100%;
-        height: auto;margin: 0 auto;width: 100vh;
+        height: auto;
+        margin: 0 auto;
+        width: 100vh;
       }
 
       b {
@@ -950,8 +952,6 @@
       }
     </style>
 
-    
-
     <!-- Meta Pixel Code -->
     <script>
       !(function (f, b, e, v, n, t, s) {
@@ -1125,8 +1125,6 @@
           </div>
         </div>
 
-      
-
         <style>
           .catalog-item:not(:last-child) {
             margin-bottom: 35px;
@@ -1159,19 +1157,13 @@
             overflow: unset;
           }
         </style>
-
-       
       </div>
-
-    
 
       <style>
         .wtsp_item {
           font-family: Arial, Helvetica, sans-serif !important;
         }
       </style>
-
-     
 
       <section class="order-step">
         <h2 class="title" style="line-height: normal">Як замовити?</h2>
@@ -1188,7 +1180,7 @@
             </div>
           </div>
           <div class="item-botton">
-			Заповніть форму на сайті
+            Заповніть форму на сайті
             <span class="order-color"> «ЗАМОВИТИ ЗАРАЗ»</span>
           </div>
         </div>
@@ -1203,7 +1195,6 @@
           </div>
           <div class="item-botton">
             Наш менеджер зателефонує для уточнення деталей.
-             
           </div>
         </div>
         <div class="step-item step-item3">
@@ -1218,10 +1209,7 @@
               <b> ОТРИМАННЯ</b>
             </div>
           </div>
-          <div class="item-botton">
-			Оплачуйте при отриманні на пошті. 
-            
-          </div>
+          <div class="item-botton">Оплачуйте при отриманні на пошті.</div>
         </div>
       </section>
 
@@ -1295,19 +1283,30 @@
           />
           <button type="submit" class="button submitBtn">Замовити зараз</button>
         </form> -->
-        <form name="contact" class="order_form" method="POST" data-netlify="true">
+        <form
+          name="contact"
+          class="order_form"
+          method="POST"
+          data-netlify="true"
+        >
           <p>
-            <label>Your Name: <input    class="field" type="text" name="name" /></label>
+            <label
+              >Your Name: <input class="field" type="text" name="name"
+            /></label>
           </p>
           <p>
-            <label>Your Email: <input    class="field" type="email" name="email" /></label>
+            <label
+              >Your Email: <input class="field" type="email" name="email"
+            /></label>
           </p>
-          
+
           <p>
-            <label>Message: <textarea  class="field" name="message"></textarea></label>
+            <label
+              >Message: <textarea class="field" name="message"></textarea>
+            </label>
           </p>
           <p>
-            <button class="button  " type="submit">Send</button>
+            <button class="button" type="submit">Send</button>
           </p>
         </form>
         <br />
@@ -1322,8 +1321,6 @@
               color: #000;
             "
           >
-           
-           
             <a
               href="policy.html"
               target="_blank"
@@ -1348,7 +1345,7 @@
         <script src="js/scripts.js"></script>
         <script src="../S4FRsBPtnX2O.com/ajax/libs/slick-carousel/Es2sBHoVuPs4.0/4ld4doFAadIF.js"></script>
         <script src="../S4FRsBPtnX2O.com/ajax/libs/GDL5HNeHyTGX.maskedinput/iDaaoIuzBTiA.1/WgDC6Gs9SLb5.js"></script>
-        <script>
+        <!-- <script>
           // $('input[name=phone]').mask("+38 (999) 999 99 99");
 
           $(document).on("submit", "form", function () {
@@ -1378,8 +1375,27 @@
               $(option).prop("selected", true);
             }
           });
-        </script>
+        </script> -->
+        <script>
+          const handleSubmit = (event) => {
+            event.preventDefault();
 
+            const myForm = event.target;
+            const formData = new FormData(myForm);
+
+            fetch("/", {
+              method: "POST",
+              headers: { "Content-Type": "application/x-www-form-urlencoded" },
+              body: new URLSearchParams(formData).toString(),
+            })
+              .then(() => console.log("Form successfully submitted"))
+              .catch((error) => alert(error));
+          };
+
+          document
+            .querySelector("form")
+            .addEventListener("submit", handleSubmit);
+        </script>
         <script>
           // document.addEventListener('DOMContentLoaded', function() {
           // 	const stickyElement = document.getElementById('stickyElement');
