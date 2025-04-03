@@ -44,7 +44,7 @@
 
 // netlify/functions/send-to-sheet.js
 exports.handler = async function (event, context) {
-  const { name, email, message } = JSON.parse(event.body);
+  const { name, email,phone, message } = JSON.parse(event.body);
 
   // URL скрипта Google Apps Script (замени на свой)
   const scriptUrl =
