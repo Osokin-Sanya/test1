@@ -47,7 +47,7 @@ exports.handler = async function (event, context) {
   const { name, email, message } = JSON.parse(event.body);
 
   // URL скрипта Google Apps Script (замени на свой)
-  const scriptUrl = "https://script.google.com/macros/s/AKfycbyly5mlGo5p4zCNYeVvgtGl80TxyeLNVRhnOdeVS2CPUtPyc3f3YXjt4MUI4vDgIwptkA/exec";
+  const scriptUrl = "https://script.google.com/macros/s/AKfycbxykhKFApaUiYUBGCVzwRNR3WJ914A7rqluDWYpWe-wchu4B57mOjUvp1iqDbJIv8wwJQ/exec";
 
   const response = await fetch(scriptUrl, {
     method: "POST",
