@@ -1353,16 +1353,60 @@
               event.preventDefault();
               const formData = new FormData(event.target);
               const data = Object.fromEntries(formData.entries());
+              const url =
+                "https://script.google.com/macros/s/AKfycbyv3Ys9uGUvjvrieZHSXtyKEZg160YWnAJTvuma4bG26gRiQg_Zz3jFDdY2EQEg24Pw4w/exec"; // Вынесем URL для удобства
 
-              fetch(
-                "https://script.google.com/macros/s/AKfycbzql4SXYqsPkB8OYDPDl7cREAbSlFvBqdZLbEAsDJ4sR8a8H3eOVovqjMjmmHHzRF3kjw/exec",
-                {
-                  method: "POST",
-                  mode: "cors",
-                  headers: { "Content-Type": "application/json" },
-                  body: JSON.stringify(data),
-                }
-              ).then(() => alert("Отправлено!"));
+              // Можно добавить индикатор загрузки здесь
+
+              fetch(url, {
+                method: "POST",
+                mode: "cors",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data),
+              })
+                .then((response) => {
+                  // Проверяем, успешен ли ответ (статус 2xx)
+                  if (!response.ok) {
+                    // Если сервер вернул ошибку (4xx, 5xx), генерируем ошибку
+                    // Попробуем прочитать тело ошибки, если оно есть
+                    return response
+                      .json()
+                      .catch(() => null)
+                      .then((errorData) => {
+                        throw new Error(
+                          `Ошибка сервера: ${response.status}. ${
+                            errorData?.message || ""
+                          }`
+                        );
+                      });
+                  }
+                  // Если все хорошо, пытаемся распарсить JSON ответ от сервера
+                  return response.json();
+                })
+                .then((result) => {
+                  // Сервер ответил успешно (статус 2xx) и вернул JSON
+                  console.log("Успешный ответ от сервера:", result);
+                  if (result.status === "Success") {
+                    alert("Отправлено и успешно обработано!");
+                    event.target.reset(); // Очистить форму после успешной отправки
+                  } else {
+                    // Если сервер вернул {status: "Error", ...}
+                    alert(
+                      `Произошла ошибка на сервере: ${
+                        result.message || "Неизвестная ошибка"
+                      }`
+                    );
+                  }
+                  // Убрать индикатор загрузки
+                })
+                .catch((error) => {
+                  // Обработка ошибок сети или ошибок, брошенных выше
+                  console.error("Ошибка при отправке:", error);
+                  alert(`Ошибка при отправке данных: ${error.message}`);
+                  // Убрать индикатор загрузки
+                });
             });
         </script>
 
