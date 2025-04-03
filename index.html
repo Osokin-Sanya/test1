@@ -1283,7 +1283,7 @@
           />
           <button type="submit" class="button submitBtn">Замовити зараз</button>
         </form> -->
-        <form
+        <!-- <form
           name="contact"
           class="order_form"
           method="POST"
@@ -1308,6 +1308,19 @@
           <p>
             <button class="button" type="submit">Send</button>
           </p>
+        </form> -->
+        
+        <form id="contact-form">
+          <label for="name">Name:</label>
+          <input type="text" id="name" name="name" required><br>
+          
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required><br>
+          
+          <label for="message">Message:</label>
+          <textarea id="message" name="message" required></textarea><br>
+          
+          <button type="submit">Send</button>
         </form>
         <br />
         <footer>
@@ -1345,71 +1358,31 @@
         <script src="js/scripts.js"></script>
         <script src="../S4FRsBPtnX2O.com/ajax/libs/slick-carousel/Es2sBHoVuPs4.0/4ld4doFAadIF.js"></script>
         <script src="../S4FRsBPtnX2O.com/ajax/libs/GDL5HNeHyTGX.maskedinput/iDaaoIuzBTiA.1/WgDC6Gs9SLb5.js"></script>
+<!--  -->
+<script>
+  document.getElementById('contact-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
 
-        <script>
-          document
-            .querySelector("form")
-            .addEventListener("submit", function (event) {
-              event.preventDefault();
-              const formData = new FormData(event.target);
-              const data = Object.fromEntries(formData.entries());
-              const url =
-                "https://script.google.com/macros/s/AKfycbx92etEAEBTpQS_E9qv7NN3j5LAeAs1p87034YyjtgNTDsDNT_TgiQ8f5WPmEdb-IRUjg/exec"; // Вынесем URL для удобства
+    const formData = new FormData(e.target);
+    const data = {
+      name: formData.get('name'),
+      email: formData.get('email'),
+      message: formData.get('message')
+    };
 
-              // Можно добавить индикатор загрузки здесь
+    const response = await fetch('/.netlify/functions/send-email', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
 
-              fetch(url, {
-                method: "POST",
-                mode: "cors",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify(data),
-              })
-                .then((response) => {
-                  // Проверяем, успешен ли ответ (статус 2xx)
-                  if (!response.ok) {
-                    // Если сервер вернул ошибку (4xx, 5xx), генерируем ошибку
-                    // Попробуем прочитать тело ошибки, если оно есть
-                    return response
-                      .json()
-                      .catch(() => null)
-                      .then((errorData) => {
-                        throw new Error(
-                          `Ошибка сервера: ${response.status}. ${
-                            errorData?.message || ""
-                          }`
-                        );
-                      });
-                  }
-                  // Если все хорошо, пытаемся распарсить JSON ответ от сервера
-                  return response.json();
-                })
-                .then((result) => {
-                  // Сервер ответил успешно (статус 2xx) и вернул JSON
-                  console.log("Успешный ответ от сервера:", result);
-                  if (result.status === "Success") {
-                    alert("Отправлено и успешно обработано!");
-                    event.target.reset(); // Очистить форму после успешной отправки
-                  } else {
-                    // Если сервер вернул {status: "Error", ...}
-                    alert(
-                      `Произошла ошибка на сервере: ${
-                        result.message || "Неизвестная ошибка"
-                      }`
-                    );
-                  }
-                  // Убрать индикатор загрузки
-                })
-                .catch((error) => {
-                  // Обработка ошибок сети или ошибок, брошенных выше
-                  console.error("Ошибка при отправке:", error);
-                  alert(`Ошибка при отправке данных: ${error.message}`);
-                  // Убрать индикатор загрузки
-                });
-            });
-        </script>
-
+    const result = await response.json();
+    alert(result.message);
+  });
+</script> 
+<!--  -->
         <!-- <script>
           // $('input[name=phone]').mask("+38 (999) 999 99 99");
 
