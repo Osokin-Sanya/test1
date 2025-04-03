@@ -1,0 +1,130 @@
+<!DOCTYPE html><html><head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&subset=latin,cyrillic" rel="stylesheet" type="text/css">
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f1f4f5;
+            color: #37474f;
+            font-family: 'Open Sans', sans-serif;
+        }
+        .container {
+            display: flex;
+            width: 535px;
+        }
+        .container-code{
+            min-width: 250px;
+            text-align: center;
+        }
+        .container-text {
+            min-width: 250px;
+            padding-left: 20px;
+        }
+        .error_code {
+            display: block;
+            font-size: 92px;
+            font-weight: 700;
+            margin-top: -25px;
+        }
+        .error_brief {
+            display: block;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+            }
+            .container-text{
+                padding: 30px;
+                text-align: center;
+                min-width: auto;
+            }
+            .container-code{
+                min-width: auto;
+                text-align: center;
+                margin-top: 100px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="container-code">
+            <span class="error_code">404</span>
+            <span class="error_description message_2"></span>
+        </div>
+        <div class="container-text">
+            <span class="error_brief message_0"></span>
+        </div>
+    </div>
+<script>
+    window.languages = {
+        'en': {
+            '.message_0': 'The requested resource was not found on the server',
+            'title': '404 Not Found',
+            '.message_2': 'Not Found'
+        },
+        'pl': {
+            '.message_0': 'Żądany zasób nie został znaleziony na serwerze',
+            'title': '404 Nie znaleziono',
+            '.message_2': 'Nie znaleziono'
+        },
+        'de': {
+            '.message_0': 'Die angeforderte Ressource wurde auf dem Server nicht gefunden',
+            'title': '404 Nicht gefunden',
+            '.message_2': 'Nicht gefunden'
+        },
+        'uk': {
+            '.message_0': 'Запитуваний ресурс не знайдено на сервері',
+            'title': '404 Не знайдено',
+            '.message_2': 'Не знайдено'
+        },
+        'cn': {
+            '.message_0': '服务器上未找到请求的资源',
+            'title': '404 未找到',
+            '.message_2': '未找到'
+        },
+        'ru': {
+            '.message_0': 'Запрошенный ресурс не найден на сервере',
+            'title': '404 Не найден',
+            '.message_2': 'Не найден'
+        }
+    };
+
+	function display(){
+		let default_lang = 'en',
+			browser_lang = window.navigator.language || navigator.userLanguage,
+			lang = '';
+
+		browser_lang = browser_lang.slice(0, 2).toLowerCase();
+
+		if( window.languages.hasOwnProperty(browser_lang) ){
+			lang = browser_lang;
+		}else{
+			lang = default_lang;
+		}
+
+		for (let key in window.languages[lang]){
+			if(undefined !== document.querySelector(key)){
+				document.querySelector(key).innerHTML = window.languages[lang][key];
+			}
+		}
+
+		return false;
+	}
+
+	document.addEventListener("DOMContentLoaded", display);
+</script>
+
+</body></html>
