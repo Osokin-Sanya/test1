@@ -1,13 +1,20 @@
+
+
+
 // netlify/functions/send-email.js
 const nodemailer = require('nodemailer');
 
 exports.handler = async function(event, context) {
+  // Проверка, что тело запроса пришло в правильном формате
+  const body = JSON.parse(event.body);
+  console.log(body); // Логирование тела запроса для отладки
+
   // Настройки транспортерa для отправки письма через Gmail
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
       user: 'himera554@gmail.com', // твой email
-      pass: 'qbtfrkkmbvtqgndz', // используй App Password от Google
+      pass: 'qbtfrkkmbvtqgndz',   // используй App Password от Google
     },
   });
 
@@ -16,7 +23,7 @@ exports.handler = async function(event, context) {
     from: 'himera554@gmail.com', // твой email
     to: 'himera554@gmail.com', // email получателя
     subject: 'New Message from Website',
-    text: `Message from: ${event.body.name}\nEmail: ${event.body.email}\nMessage: ${event.body.message}`,
+    text: `Message from: ${body.name}\nEmail: ${body.email}\nMessage: ${body.message}`,
   };
 
   try {
