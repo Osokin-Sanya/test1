@@ -1256,7 +1256,7 @@
           </div>
         </div>
         <br />
-        <form
+        <!-- <form
           id="order6"
           class="order_form"
           action="order.php"
@@ -1277,7 +1277,7 @@
               Прорізувач пульт Рожевий - 199 грн
             </option>
 
-            <!--<option value="Прорізувач пульт Чорний|229|346">Прорізувач пульт Чорний - 229 грн</option>-->
+          
           </select>
           <input
             class="field"
@@ -1294,8 +1294,22 @@
             required=""
           />
           <button type="submit" class="button submitBtn">Замовити зараз</button>
+        </form> -->
+        <form name="contact" class="order_form" method="POST" data-netlify="true">
+          <p>
+            <label>Your Name: <input    class="field" type="text" name="name" /></label>
+          </p>
+          <p>
+            <label>Your Email: <input    class="field" type="email" name="email" /></label>
+          </p>
+          
+          <p>
+            <label>Message: <textarea  class="field" name="message"></textarea></label>
+          </p>
+          <p>
+            <button class="button  " type="submit">Send</button>
+          </p>
         </form>
-
         <br />
         <footer>
           <div
