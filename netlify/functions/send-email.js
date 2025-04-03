@@ -54,7 +54,7 @@ exports.handler = async function (event, context) {
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ name, email, message }),
+    body: JSON.stringify({ name, email, message, phone }),
   });
 
   if (response.ok) {
