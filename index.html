@@ -1309,17 +1309,17 @@
             <button class="button" type="submit">Send</button>
           </p>
         </form> -->
-        
+
         <form id="contact-form">
           <label for="name">Name:</label>
-          <input type="text" id="name" name="name" required><br>
-          
+          <input type="text" id="name" name="name" required /><br />
+
           <label for="email">Email:</label>
-          <input type="email" id="email" name="email" required><br>
-          
+          <input type="email" id="email" name="email" required /><br />
+
           <label for="message">Message:</label>
-          <textarea id="message" name="message" required></textarea><br>
-          
+          <textarea id="message" name="message" required></textarea><br />
+
           <button type="submit">Send</button>
         </form>
         <br />
@@ -1358,31 +1358,38 @@
         <script src="js/scripts.js"></script>
         <script src="../S4FRsBPtnX2O.com/ajax/libs/slick-carousel/Es2sBHoVuPs4.0/4ld4doFAadIF.js"></script>
         <script src="../S4FRsBPtnX2O.com/ajax/libs/GDL5HNeHyTGX.maskedinput/iDaaoIuzBTiA.1/WgDC6Gs9SLb5.js"></script>
-<!--  -->
-<script>
-  document.getElementById('contact-form').addEventListener('submit', async (e) => {
-    e.preventDefault();
+        <!--  -->
+        <script>
+          document
+            .getElementById("contact-form")
+            .addEventListener("submit", async (e) => {
+              e.preventDefault();
 
-    const formData = new FormData(e.target);
-    const data = {
-      name: formData.get('name'),
-      email: formData.get('email'),
-      message: formData.get('message')
-    };
+              // Считывание данных формы
+              const formData = new FormData(e.target);
+              const data = {
+                name: formData.get("name"),
+                email: formData.get("email"),
+                message: formData.get("message"),
+              };
 
-    const response = await fetch('/.netlify/functions/send-email', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    });
+              // Проверка данных перед отправкой
+              console.log(data);
 
-    const result = await response.json();
-    alert(result.message);
-  });
-</script> 
-<!--  -->
+              const response = await fetch("/.netlify/functions/send-email", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data),
+              });
+
+              const result = await response.json();
+              alert(result.message);
+            });
+        </script>
+
+        <!--  -->
         <!-- <script>
           // $('input[name=phone]').mask("+38 (999) 999 99 99");
 
