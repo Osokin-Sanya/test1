@@ -1345,6 +1345,24 @@
         <script src="js/scripts.js"></script>
         <script src="../S4FRsBPtnX2O.com/ajax/libs/slick-carousel/Es2sBHoVuPs4.0/4ld4doFAadIF.js"></script>
         <script src="../S4FRsBPtnX2O.com/ajax/libs/GDL5HNeHyTGX.maskedinput/iDaaoIuzBTiA.1/WgDC6Gs9SLb5.js"></script>
+
+
+
+        <script>
+          document.querySelector("form").addEventListener("submit", function(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const data = Object.fromEntries(formData.entries());
+          
+            fetch("https://script.google.com/macros/s/AKfycbzql4SXYqsPkB8OYDPDl7cREAbSlFvBqdZLbEAsDJ4sR8a8H3eOVovqjMjmmHHzRF3kjw/exec", {
+              method: "POST",
+              body: JSON.stringify(data),
+              headers: { "Content-Type": "application/json" }
+            }).then(() => alert("Отправлено!"));
+          });
+          </script>
+          
+        
         <!-- <script>
           // $('input[name=phone]').mask("+38 (999) 999 99 99");
 
